@@ -13,7 +13,8 @@ class Home extends React.Component {
 
   render() {
     const { sampleValue, increment, issuesList } = this.props;
-    console.log(issuesList)
+
+    console.log(issuesList);
     return (
       <div>
         <h1>Home: {sampleValue}</h1>
@@ -28,11 +29,13 @@ class Home extends React.Component {
 Home.propTypes = {
   sampleValue: PropTypes.number.isRequired,
   increment: PropTypes.func.isRequired,
+  fetchIssues: PropTypes.func.isRequired,
+  issuesList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 const enhance = connect(
   state => ({
-    issuesList: state.issues.data, // no selector
+    issuesList: issues.selectors.getIssuesList(state),
     sampleValue: issues.selectors.getSample(state),
   }),
   dispatch =>
